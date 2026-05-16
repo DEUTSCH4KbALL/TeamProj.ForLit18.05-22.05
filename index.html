@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Десять негритят — Агата Крісті</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0b0d13;
+            --panel: rgba(255, 255, 255, .06);
+            --gold: #d6b26e;
+            --text: #e8e8e8;
+            --muted: #b9b9b9;
+            --line: rgba(214, 178, 110, .35);
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(214, 178, 110, .08), transparent 35%),
+                radial-gradient(circle at 80% 30%, rgba(255, 255, 255, .04), transparent 30%),
+                radial-gradient(circle at 50% 80%, rgba(214, 178, 110, .05), transparent 35%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 80px 8%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(rgba(8, 10, 15, .75), rgba(8, 10, 15, .9)),
+                url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=80') center/cover;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Cinzel', serif
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: 4px;
+            color: white
+        }
+
+        .subtitle {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 1.2rem
+        }
+
+        .scroll {
+            position: absolute;
+            bottom: 35px;
+            font-size: 2rem;
+            color: var(--gold);
+            animation: bounce 2s infinite
+        }
+
+        .wrap {
+            max-width: 1100px;
+            width: 100%
+        }
+
+        .title {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 30px
+        }
+
+        .text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text)
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, .08);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            padding: 28px;
+            transition: .35s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--line);
+            box-shadow: 0 0 30px rgba(214, 178, 110, .12)
+        }
+
+        .card h3 {
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-size: 1.15rem
+        }
+
+        .card p {
+            color: var(--muted);
+            line-height: 1.7
+        }
+
+        .timeline {
+            border-left: 2px solid var(--line);
+            padding-left: 30px;
+            margin-top: 20px
+        }
+
+        .event {
+            position: relative;
+            margin-bottom: 30px
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 7px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 12px rgba(214, 178, 110, .7);
+        }
+
+        .quote {
+            font-size: clamp(1.5rem, 3vw, 2.3rem);
+            text-align: center;
+            font-style: italic;
+            color: var(--gold);
+            line-height: 1.6;
+            max-width: 900px
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            color: #777;
+            border-top: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s
+        }
+
+        .fade.show {
+            opacity: 1;
+            transform: none
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(10px)
+            }
+        }
+
+        @media(max-width:768px) {
+            .title {
+                font-size: 2rem
+            }
+
+            .panel {
+                padding: 25px
+            }
+
+            .text {
+                font-size: 1rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div>
+            <h1>Десять негритят</h1>
+            <p class="subtitle">Презентація улюбленої книги · Агата Крісті</p>
+        </div>
+        <div class="scroll">↓</div>
+    </section>
+
+    <section class="fade">
+        <div class="wrap panel">
+            <h2 class="title">Назва книги та автор</h2>
+            <p class="text">Наша улюблена книга — <b>«Десять негритят»</b>, написана відомою британською письменницею
+                <b>Агатою Крісті</b>, яку називають «королевою детективу». Цей роман став одним із найвідоміших
+                детективів у світі та захопив мільйони читачів. Нам подобаються детективні історії, тому що вони
+                змушують думати, аналізувати події та намагатися розгадати таємницю разом із героями.</p>
+        </div>
+    </section>
+
+    <section class="fade">
+        <div class="wrap panel">
+            <h2 class="title">Коротко про сюжет</h2>
+            <div class="timeline text">
+                <div class="event">Десять людей отримують загадкове запрошення на маленький острів.</div>
+                <div class="event">Невідомий голос звинувачує кожного у злочині з минулого.</div>
+                <div class="event">Після цього люди починають зникати один за одним.</div>
+                <div class="event">Герої розуміють, що серед них є вбивця, але ніхто не знає, кому довіряти.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade">
+        <div class="wrap">
+            <h2 class="title">Головні герої</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Таємничі гості</h3>
+                    <p>Кожен персонаж має свій характер, секрети та приховане минуле.</p>
+                </div>
+                <div class="card">
+                    <h3>Страх</h3>
+                    <p>Через небезпеку герої змінюються та починають нервувати.</p>
+                </div>
+                <div class="card">
+                    <h3>Підозра</h3>
+                    <p>Кожен підозрює інших і боїться залишатися наодинці.</p>
+                </div>
+                <div class="card">
+                    <h3>Напруга</h3>
+                    <p>До самого фіналу неможливо зрозуміти, хто справжній злочинець.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade">
+        <div class="wrap">
+            <h2 class="title">Чому нам сподобалась книга</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Захопливий сюжет</h3>
+                    <p>Під час читання постійно хочеться дізнатися, що буде далі.</p>
+                </div>
+                <div class="card">
+                    <h3>Багато загадок</h3>
+                    <p>Авторка спеціально заплутує читача та тримає інтригу.</p>
+                </div>
+                <div class="card">
+                    <h3>Атмосфера</h3>
+                    <p>Самотній острів, страх і таємниці створюють особливу напругу.</p>
+                </div>
+                <div class="card">
+                    <h3>Неочікуваний фінал</h3>
+                    <p>Саме кінцівка робить цей роман незабутнім.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade">
+        <div class="quote">«До самого кінця неможливо зрозуміти, хто ж насправді злочинець.»</div>
+    </section>
+
+    <section class="fade">
+        <div class="wrap panel">
+            <h2 class="title">Наш висновок</h2>
+            <p class="text">Ми вважаємо, що <b>«Десять негритят»</b> — це дуже цікава та захоплива книга. Вона вчить
+                бути уважними, думати над вчинками людей і показує, що за свої дії потрібно відповідати. Ми рекомендуємо
+                цю книгу всім, хто любить детективи, загадки та несподівані сюжети.</p>
+        </div>
+    </section>
+
+    <footer>Презентація підготовлена командою для уроку зарубіжної літератури</footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('show');
+            });
+        }, { threshold: .15 });
+        document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
